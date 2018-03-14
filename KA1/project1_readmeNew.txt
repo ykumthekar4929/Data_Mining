@@ -93,7 +93,7 @@ for each classifier. Also, the average of these 5 accuracy numbers.
 (C) On handwritten letter data, fix on 10 classes. Use the data handler to generate training and test data files.
     Do this for seven different splits:  (train=5 test=34), (train=10 test=29),  (train=15 test=24) ,
        (train=20 test=19), (train=25 test=24) , (train=30 test=9) ,  (train=35 test=4).
-    On these seven different cases, run the centroid classifier to compute average test image classification
+    On these seven different cases, run the centroid classifier to compute average test  image classification
     accuracy. Plot these 7 average accuracy on one curve in a figure. What trend can you observe?
     When do this task, the training data and test data do not need be written into files.
 
@@ -102,6 +102,7 @@ for each classifier. Also, the average of these 5 accuracy numbers.
     Plot them on one curve in the same figure as in task (D). Do you see some trend?
 
 (E) write data handler.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   Data handler  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Data handler will help you to "extract a small part of a input data" and

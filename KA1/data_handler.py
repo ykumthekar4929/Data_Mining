@@ -32,12 +32,12 @@ def train_test_split(data):
 
 def pickDataClass(filename, class_ids):
     '''
-    subroutine-1: pickDataClass(filename, class_ids)
-      filename: char_string specifying the data file to read. For example, 'ATNT_face_image.txt'
-      class_ids:  array that contains the classes to be pick. For example: (3, 5, 8, 9)
-      Returns: an multi-dimension array containing the data (both attribute vectors and class labels)
-               of the selected classes
-      e.g. pickDataClass('ATNTFaceImages400.txt', (3, 5, 8, 9))
+	    subroutine-1: pickDataClass(filename, class_ids)
+	      filename: char_string specifying the data file to read. For example, 'ATNT_face_image.txt'
+	      class_ids:  array that contains the classes to be pick. For example: (3, 5, 8, 9)
+	      Returns: an multi-dimension array containing the data (both attribute vectors and class labels)
+	               of the selected classes
+	      e.g. pickDataClass('ATNTFaceImages400.txt', (3, 5, 8, 9))
     '''
     dataset, class_indexes = get_data(filename)
     picked_data = []
@@ -47,27 +47,26 @@ def pickDataClass(filename, class_ids):
 
 
 def splitData2TestTrain(filename, number_per_class,  test_instances):
-
     '''
-    subroutine-2: splitData2TestTrain(filename, number_per_class,  test_instances)
-      filename: char_string specifying the data file to read. This can also be an array containing input data.
-      number_per_class: number of data instances in each class (we assume every class has the same number of data instances)
-      test_instances: the data instances in each class to be used as test data.
-                      We assume that the remaining data instances in each class (after the test data instances are taken out)
-                      will be training_instances
-      Return/output: Training_attributeVector(trainX), Training_labels(trainY), Test_attributeVectors(testX), Test_labels(testY)
-      The data should easily fed into a classifier.
+	    subroutine-2: splitData2TestTrain(filename, number_per_class,  test_instances)
+	      filename: char_string specifying the data file to read. This can also be an array containing input data.
+	      number_per_class: number of data instances in each class (we assume every class has the same number of data instances)
+	      test_instances: the data instances in each class to be used as test data.
+	                      We assume that the remaining data instances in each class (after the test data instances are taken out)
+	                      will be training_instances
+	      Return/output: Training_attributeVector(trainX), Training_labels(trainY), Test_attributeVectors(testX), Test_labels(testY)
+	      The data should easily fed into a classifier.
 
-      Example: splitData2TestTrain('Handwrittenletters.txt', 39, 1:20)
-               Use entire 26-class handwrittenletters data. Each class has 39 instances.
-               In every class, first 20 images for testing, remaining 19 images for training
+	      Example: splitData2TestTrain('Handwrittenletters.txt', 39, 1:20)
+	               Use entire 26-class handwrittenletters data. Each class has 39 instances.
+	               In every class, first 20 images for testing, remaining 19 images for training
     '''
-
     if isinstance(filename, str):
         dataset, class_indexes = get_data(filename)
     else:
         dataset = filename
         class_indexes = [item[-1] for item in dataset]
+
     unique_class_indexes = list(set(class_indexes))
     per_class_instances = []
     for i in unique_class_indexes:
@@ -87,7 +86,6 @@ def splitData2TestTrain(filename, number_per_class,  test_instances):
 # splitData2TestTrain(pickDataClass('Handwrittenletters.txt', (21,22,23,24)), 39, "1:20")
 # splitData2TestTrain(pickDataClass('Handwrittenletters.txt', (21,22,23,24)), 9,  "1:20")
 # pickDataClass('Handwrittenletters.txt', (3, 5, 8, 9))
-
 
 def store_data(trainX, trainY, testX, testY):
     '''
@@ -110,6 +108,7 @@ def store_data(trainX, trainY, testX, testY):
     file.write(str(test_dict))
     file.close()
 
+
 # # store_data(splitData2TestTrain(pickDataClass('Handwrittenletters.txt', (21,22,23,24)), 39, "1:20"))
 # trainX, trainY, testX, testY = splitData2TestTrain(pickDataClass('Handwrittenletters.txt', (21,22,23,24)), 39, "1:20")
 # store_data(trainX, trainY, testX, testY)
@@ -125,6 +124,6 @@ Subroutine-4: "letter_2_digit_convert" that converts a character string to an in
 '''
 
 def letter_2_digit_convert(sample):
-    print ([ ord(item.upper())-64 for item in sample])
+    return ([ ord(item.upper())-64 for item in sample])
 
 # letter_2_digit_convert("ASDFRE")
