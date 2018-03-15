@@ -28,14 +28,13 @@ def pre_processor(file):
 
 
 def knn_driver(train_data, test_data, k):
-	print (k)
 	test_results = [getNeighbors(train_data, testInstance, k) for testInstance in test_data]
 	test_metrics = [[item[-1] for item in neighbor] for neighbor in test_results]
 	test_pos_count = 0
 	for index, item in enumerate(test_data):
 		if item[-1] == mode(test_metrics[index]):
 			test_pos_count+=1
-	print (((test_pos_count/len(test_metrics))*100))
+	return (((test_pos_count/len(test_metrics))*100))
 
 def mode(numbers):
     largestCount = 0

@@ -37,7 +37,6 @@ def getCentroid(labelVectors):
 
 
 def predict(trainX, trainY, testX, testY, k):
-	print (k)
 
 	unique_trainY = list(set(trainY))
 	clustersDict = {}
