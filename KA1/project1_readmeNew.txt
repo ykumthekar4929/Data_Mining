@@ -83,7 +83,6 @@ four classifiers: KNN, centroid, Linear Regression and SVM.
 
 If you don't know how to partition the data for CV, you can use the data-handler to do that.
 
-
 Report the classification accuracy on each classifier.
 Remember, each of the 5-fold CV gives one accuracy. You need to present all 5 accuracy numbers
 for each classifier. Also, the average of these 5 accuracy numbers.
