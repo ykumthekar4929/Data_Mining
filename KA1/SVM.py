@@ -38,14 +38,10 @@ def predict(trainX, trainY, testX, testY):
 def cross_validate(trainX, trainY, testX, testY):
     Xtest=np.array(testX,np.int32)
     Ytest=np.array(testY,np.int32)
-    # clf = predict(trainX, trainY, testX, testY)
-    # import ipdb; ipdb.set_trace()
-    # print ("HElor")
     clf=svm.SVC()
     scores = cross_val_score(clf, Xtest, Ytest, cv=5)
     print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
     return scores.mean()
-    # print("Scores %s" %(scores))
 
 # trainX, trainY, testX, testY = data_handler.splitData2TestTrain(data_handler.pickDataClass('ATNTFaceImages400.txt',data_handler.letter_2_digit_convert("ABCDE")), 39, '1:30')
 # predict(trainX, trainY, testX, testY)

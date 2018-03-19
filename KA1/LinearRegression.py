@@ -29,7 +29,7 @@ def predict(trainX, trainY, testX, testY):
     Ytest_padding = np.dot(B_padding.T,Xtest.T)
     Ytest_padding_argmax = np.argmax(Ytest_padding,axis=0)+1
     err_test_padding = Ytest - Ytest_padding_argmax
-    TestingAccuracy_padding = -(float((1-np.nonzero(err_test_padding)[0].size)/len(err_test_padding)))*100
+    TestingAccuracy_padding = (float((1-np.nonzero(err_test_padding)[0].size)/len(err_test_padding)))*100
     return Ytest_padding, TestingAccuracy_padding
 
 # print (predict(trainX, trainY, testX, testY ))

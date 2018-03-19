@@ -6,7 +6,8 @@ import SVM
 import numpy as np
 import random
 
-def fxcv_driver(k, train_data, feature_names):
+def cross_validator(k, train_data, feature_names, classifier):
+
     for index, item in enumerate(train_data):
         item.append(feature_names[index])
 
@@ -15,7 +16,7 @@ def fxcv_driver(k, train_data, feature_names):
     feature_splits = [[in_item[-1] for in_item in item]for item in k_splits]
     all_accuracy =  0
     for k in range(0,k):
-        print (k)
+        print ("For %s fold" %(int(k)+1))
         trainX = []
         trainY = []
         testX = k_splits[k]
@@ -25,19 +26,40 @@ def fxcv_driver(k, train_data, feature_names):
         for x in range(len(trainX_temp)):
             trainX.extend(trainX_temp[x])
             trainY.extend(trainY_temp[x])
-        # accuracy = (centroid_classifier.predict(trainX, trainY, testX, testY, 4))
-        # accuracy = (SVM.get_score(trainX, trainY, testX, testY))
-        # accuracy = (kn_classifier.knn_driver(trainX,  testX, 4))
-        # print (accuracy)
-        # import ipdb; ipdb.set_trace()
 
+        if classifier == 1:
+            accuracy = (kn_classifier.knn_driver(trainX,  testX, 4))
+        elif classifier == 2:
+            accuracy = (centroid_classifier.predict(trainX, trainY, testX, testY, 4))
+        elif classifier == 3:
+            matrix, accuracy = (LinearRegression.predict(trainX, trainY, testX, testY))
+        print (abs(accuracy))
         all_accuracy += accuracy
+
     k_accuracy = float(all_accuracy)/5
-    return k_accuracy
+    return abs(k_accuracy)
 
-# data, indexes = data_handler.get_data("ATNTFaceImages400.txt")
-# print (fxcv_driver(5, data, indexes))
-trainX, trainY, testX, testY = data_handler.splitData2TestTrain('ATNTFaceImages400.txt', 10, '1:10')
+def getTitle(classifier):
+    return {
+        '1':"KNN Classifier",
+        '2':"Centroid Classifier",
+        '3':"Linear regression",
+        '4':"Support vector Machine"
+    }[str(classifier)]
+
+def driver(classifier):
+    print (getTitle(classifier))
+    if classifier == 4:
+        trainX, trainY, testX, testY = data_handler.splitData2TestTrain('ATNTFaceImages400.txt', 10, '1:10')
+        print ("\nAverage Accuracy for 5 folds: %s"% SVM.cross_validate(trainX, trainY, testX, testY))
+    else:
+        data, indexes = data_handler.get_data("ATNTFaceImages400.txt")
+        print ("\nAverage Accuracy for 5 folds: %s"%cross_validator(5, data, indexes, classifier))
 
 
-print (SVM.cross_validate(trainX, trainY, testX, testY))
+def main():
+    for i in range(1,5):
+        driver(4)
+
+if __name__ == '__main__':
+    main()
