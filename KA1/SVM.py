@@ -9,7 +9,7 @@ from sklearn import svm
 import data_handler
 from sklearn import preprocessing
 from sklearn import metrics
-
+from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_score
 
 le = preprocessing.LabelEncoder
@@ -30,18 +30,22 @@ def predict(trainX, trainY, testX, testY):
     predicted= clf.predict(testX)
     print("Classification report for classifier %s:\n%s\n"
           % (clf, metrics.classification_report(Ytest, predicted)))
-
     return clf
     # print("Confusion matrix:\n%s" % metrics.confusion_matrix(Ytest, predicted))
     #plt.scatter(Xtrain[:,0].reshape(Xtrain[:,1].shape),Xtrain[:,1])
     #plt.plot(Ytest,result
 
 def cross_validate(trainX, trainY, testX, testY):
-    clf = predict(trainX, trainY, testX, testY)
+    Xtest=np.array(testX,np.int32)
+    Ytest=np.array(testY,np.int32)
+    # clf = predict(trainX, trainY, testX, testY)
+    # import ipdb; ipdb.set_trace()
+    # print ("HElor")
+    clf=svm.SVC()
     scores = cross_val_score(clf, Xtest, Ytest, cv=5)
     print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
     return scores.mean()
     # print("Scores %s" %(scores))
 
-# trainX, trainY, testX, testY = data_handler.splitData2TestTrain(data_handler.pickDataClass('HandWrittenLetters.txt',data_handler.letter_2_digit_convert("ABCDE")), 39, '1:30')
+# trainX, trainY, testX, testY = data_handler.splitData2TestTrain(data_handler.pickDataClass('ATNTFaceImages400.txt',data_handler.letter_2_digit_convert("ABCDE")), 39, '1:30')
 # predict(trainX, trainY, testX, testY)

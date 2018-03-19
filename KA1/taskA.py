@@ -26,7 +26,6 @@ print ("KNN accuracy %s"%kn_acc)
 
 print ("SVM method")
 svm_acc = SVM.get_score(trainX, trainY, testX, testY)
-# print ("KNN accuracy %s"%svm_acc)
 
 
 

@@ -25,11 +25,19 @@ def fxcv_driver(k, train_data, feature_names):
         for x in range(len(trainX_temp)):
             trainX.extend(trainX_temp[x])
             trainY.extend(trainY_temp[x])
-        accuracy = (centroid_classifier.predict(trainX, trainY, testX, testY, 4))
-        print (accuracy)
+        # accuracy = (centroid_classifier.predict(trainX, trainY, testX, testY, 4))
+        # accuracy = (SVM.get_score(trainX, trainY, testX, testY))
+        # accuracy = (kn_classifier.knn_driver(trainX,  testX, 4))
+        # print (accuracy)
+        # import ipdb; ipdb.set_trace()
+
         all_accuracy += accuracy
     k_accuracy = float(all_accuracy)/5
     return k_accuracy
 
-data, indexes = data_handler.get_data("Handwrittenletters.txt")
-print (fxcv_driver(5, data, indexes))
+# data, indexes = data_handler.get_data("ATNTFaceImages400.txt")
+# print (fxcv_driver(5, data, indexes))
+trainX, trainY, testX, testY = data_handler.splitData2TestTrain('ATNTFaceImages400.txt', 10, '1:10')
+
+
+print (SVM.cross_validate(trainX, trainY, testX, testY))
