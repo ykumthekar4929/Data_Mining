@@ -7,10 +7,8 @@ import numpy as np
 import random
 
 def cross_validator(k, train_data, feature_names, classifier):
-
     for index, item in enumerate(train_data):
         item.append(feature_names[index])
-
     random.shuffle(train_data)
     k_splits = np.array_split(train_data, k)
     feature_splits = [[in_item[-1] for in_item in item]for item in k_splits]
@@ -26,7 +24,6 @@ def cross_validator(k, train_data, feature_names, classifier):
         for x in range(len(trainX_temp)):
             trainX.extend(trainX_temp[x])
             trainY.extend(trainY_temp[x])
-
         if classifier == 1:
             accuracy = (kn_classifier.knn_driver(trainX,  testX, 4))
         elif classifier == 2:
@@ -35,7 +32,6 @@ def cross_validator(k, train_data, feature_names, classifier):
             matrix, accuracy = (LinearRegression.predict(trainX, trainY, testX, testY))
         print (abs(accuracy))
         all_accuracy += accuracy
-
     k_accuracy = float(all_accuracy)/5
     return abs(k_accuracy)
 
@@ -59,7 +55,7 @@ def driver(classifier):
 
 def main():
     for i in range(1,5):
-        driver(4)
+        driver(i)
 
 if __name__ == '__main__':
     main()

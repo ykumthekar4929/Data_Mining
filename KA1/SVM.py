@@ -41,6 +41,7 @@ def cross_validate(trainX, trainY, testX, testY):
     clf=svm.SVC()
     scores = cross_val_score(clf, Xtest, Ytest, cv=5)
     print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
+    print(scores)
     return scores.mean()
 
 # trainX, trainY, testX, testY = data_handler.splitData2TestTrain(data_handler.pickDataClass('ATNTFaceImages400.txt',data_handler.letter_2_digit_convert("ABCDE")), 39, '1:30')
