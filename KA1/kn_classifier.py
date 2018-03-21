@@ -13,28 +13,28 @@ def pre_processor(file):
 	indexes = []
 	data_raw = []
 	data = []
-
 	for index, line in enumerate(file):
 		if index != 0:
 			data_raw.append(line.rstrip().rsplit(','))
 		else:
 			indexes = line.rstrip().rsplit(',')
-
 	for x in range(0, len(indexes)):
 		index_list = [sample[x] for sample in data_raw]
 		data.append(index_list + [indexes[x]])
-
 	return data
 
 
 def knn_driver(train_data, test_data, k):
 	test_results = [getNeighbors(train_data, testInstance, k) for testInstance in test_data]
 	test_metrics = [[item[-1] for item in neighbor] for neighbor in test_results]
+
+	test_metrics_result = [mode(item) for item in test_metrics]
+
 	test_pos_count = 0
 	for index, item in enumerate(test_data):
 		if item[-1] == mode(test_metrics[index]):
 			test_pos_count+=1
-	return (((test_pos_count/len(test_metrics))*100))
+	return (((test_pos_count/len(test_metrics))*100)),test_metrics_result
 
 def mode(numbers):
     largestCount = 0

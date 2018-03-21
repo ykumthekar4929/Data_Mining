@@ -1,0 +1,12 @@
+8 class classification
+
+pick student IDs last 4 digits and convert to 4391 DCIA
+
+and First_name_first_letter, First_name_last_letter, Last_name_first_letter, Last_name_last_letter YNKR
+
+8 letters from HandWrittenLetters.txt
+
+DCIA YNKR
+
+1:10 Test Instances
+11:39 Training Instances

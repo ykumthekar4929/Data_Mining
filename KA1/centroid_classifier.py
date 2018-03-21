@@ -41,6 +41,7 @@ def predict(trainX, trainY, testX, testY, k):
 	unique_trainY = list(set(trainY))
 	clustersDict = {}
 	total_post_count = 0
+	predicteds = []
 
 	for x in range (len(trainY)):
 		clustersDict.setdefault(trainY[x],[]).append(trainX[x])
@@ -50,22 +51,15 @@ def predict(trainX, trainY, testX, testY, k):
 		train_data = [getCentroid(clustersDict[key]) for key in clustersDict.keys()]
 		instanceResults = getNeighbors(train_data, testInstance, k)
 		predictedClass = mode([item[-1] for item in instanceResults])
+
+		predicteds.append(predictedClass)
+
 		if predictedClass == testInstance[-1]:
 			total_post_count+=1
 			clustersDict.setdefault(predictedClass).append(testInstance)
 
-	# 	import ipdb; ipdb.set_trace()
-		# print "Hello"
-	# test_results = [getNeighbors(train_data, testInstance, k) for testInstance in testX]
-	# predictions = [mode([item[-1] for item in result]) for result in test_results]
-	#
-	# for index, prediction in enumerate(predictions):
-	# 	if prediction == testX[index][-1]:
-	# 		total_post_count += 1
 
-	return (float(total_post_count)/len(testX))*100.00
-	# end = timer()
-	# print end - start
+	return (float(total_post_count)/len(testX))*100.00, predicteds
 
 
 def mode(numbers):

@@ -25,12 +25,12 @@ def predict(trainX, trainY, testX, testY):
     Ytrain=np.array(trainY,np.int32)
     Xtest=np.array(testX,np.int32)
     Ytest=np.array(testY,np.int32)
-    clf=svm.SVC()
+    clf=svm.SVC(kernel='linear')
     clf.fit(Xtrain,Ytrain)
     predicted= clf.predict(testX)
     print("Classification report for classifier %s:\n%s\n"
           % (clf, metrics.classification_report(Ytest, predicted)))
-    return clf
+    return clf, predicted
     # print("Confusion matrix:\n%s" % metrics.confusion_matrix(Ytest, predicted))
     #plt.scatter(Xtrain[:,0].reshape(Xtrain[:,1].shape),Xtrain[:,1])
     #plt.plot(Ytest,result
