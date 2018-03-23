@@ -9,7 +9,6 @@ def get_data():
 	return pre_processor(file = open('ATNT50/trainDataXY.txt'))
 
 def pre_processor(file):
-
 	indexes = []
 	data_raw = []
 	data = []
@@ -23,13 +22,10 @@ def pre_processor(file):
 		data.append(index_list + [indexes[x]])
 	return data
 
-
 def knn_driver(train_data, test_data, k):
 	test_results = [getNeighbors(train_data, testInstance, k) for testInstance in test_data]
 	test_metrics = [[item[-1] for item in neighbor] for neighbor in test_results]
-
 	test_metrics_result = [mode(item) for item in test_metrics]
-
 	test_pos_count = 0
 	for index, item in enumerate(test_data):
 		if item[-1] == mode(test_metrics[index]):
@@ -81,8 +77,6 @@ def main():
 	train_data, test_data = train_test_split(dataset)
 	for k in range(1,11):
 		knn_driver(train_data, test_data, k)
-
-
 
 if __name__ == '__main__':
 	# print(sys.argv)
