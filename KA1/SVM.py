@@ -30,8 +30,9 @@ def predict(trainX, trainY, testX, testY):
     predicted= clf.predict(testX)
     print("Classification report for classifier %s:\n%s\n"
           % (clf, metrics.classification_report(Ytest, predicted)))
+    
     return clf, predicted
-    # print("Confusion matrix:\n%s" % metrics.confusion_matrix(Ytest, predicted))
+    #print("Confusion matrix:\n%s" % metrics.confusion_matrix(Ytest, predicted))
     #plt.scatter(Xtrain[:,0].reshape(Xtrain[:,1].shape),Xtrain[:,1])
     #plt.plot(Ytest,result
 
